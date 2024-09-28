@@ -1,1 +1,87 @@
+//C++
+// MAXIMUM SUBARRAY
+// BRUTE FORCE APPROACH
+// Time complexity: O(n^2)
+// Space complexity: O(1)
 
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    int mx = INT_MIN;
+
+    for (int i = 0; i < n; i++) {
+        int current_SUM = 0;
+        for (int j = i; j < n; j++) {
+            current_SUM += nums[j];
+        }
+        mx = max(mx, current_SUM);
+    }
+    
+    cout << mx << endl;
+    return 0;
+}
+
+// OPTIMAL APPROACH
+// KADANE'S ALGORITHM
+// Time complexity: O(n)
+// Space complexity: O(1)
+
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    int mx = INT_MIN;
+    int current_SUM = 0; 
+
+    for (int i = 0; i < n; i++) {
+        current_SUM += nums[i];
+
+        if (current_SUM > mx) {
+            mx = current_SUM;
+        }
+        if (current_SUM < 0) {
+            current_SUM = 0;
+        }
+    }
+
+    cout << mx << endl;
+    return 0;
+}
+
+// LEETCODE SOLUTION
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int cs = 0;  // Current sum
+        int mx = INT_MIN;  // Maximum sum
+        for (int i = 0; i < n; i++) {
+            cs += nums[i];
+            if (cs > mx) {
+                mx = cs;  // Update maximum sum
+            }
+            if (cs < 0) {
+                cs = 0;  // Reset current sum
+            }
+        }
+        return mx;  // Return the maximum subarray sum
+    }
+};
