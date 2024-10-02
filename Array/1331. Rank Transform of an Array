@@ -1,0 +1,12 @@
+//PYTHON3
+//LEETCODE
+//TIME COMPLEXITY :- O(nlogn)
+//SPACE COMPLEXITY :- O(n)
+
+class Solution:
+    def arrayRankTransform(self, arr):
+        s = sorted(set(arr))
+        r = {}
+        for rank,val in enumerate(s):
+            r[val] = rank+1
+        return [r[x] for x in arr]
