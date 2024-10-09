@@ -1,0 +1,25 @@
+//C++
+//LEETCODE
+//TIME COMPLEXITY :- O(n)
+//SPACE COMPLEXITY :- O(n)
+
+
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+        int n = s.size();
+        stack<char> st;
+        for(char &c: s){
+            if(st.empty()){
+                st.push(c);
+            }
+            else if(st.top()=='(' && c==')'){
+                st.pop();
+            }
+            else{
+                st.push(c);
+            }
+        }
+        return st.size();
+    }
+};
